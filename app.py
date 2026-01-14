@@ -84,7 +84,7 @@ if "show_inline_details" not in st.session_state:
 # PAGE CONFIG
 # =====================================================
 st.set_page_config(
-    page_title="FTZ Savings – Agentic AI Calculator",
+    page_title="FTZ Savings – Agentic AI Calculator - B Testing",
     layout="wide",
     page_icon="💼"
 )
@@ -154,7 +154,7 @@ st.subheader("Customer Data Assumptions")
 
 r1 = st.columns(5)
 shipments_per_week = r1[0].number_input("Shipments / Week", 1, value=2)
-avg_import_value = r1[1].number_input("Avg Import Value ($)", 1000, value=50000, step=1000)
+avg_import_value = r1[1].number_input("Avg Import Value ($)", 1000, value=500000, step=1000)
 mpf_pct = r1[2].number_input("MPF %", value=0.35, disabled=True)
 broker_cost = r1[3].number_input("Broker Cost ($/entry)", value=125.0)
 current_interest_rate = r1[4].number_input("Current Interest Rate (%)", value=6.5)
@@ -224,7 +224,7 @@ net_savings_to_brand = total_cost_without_ftz - total_cost_with_ftz
 b1,b2,b3 = st.columns(3)
 calculate = b1.button("📊 Calculate Savings", use_container_width=True)
 #cta_btn = b2.button("📞 Smart CTA", use_container_width=True)
-details = b3.button("📄 Show Details", use_container_width=True)
+#details = b3.button("📄 Show Details", use_container_width=True)
 
 # =====================================================
 # KPI OUTPUT + LOGGING
@@ -349,87 +349,87 @@ if st.session_state.cta_open:
 #     })
 #     st.dataframe(df.style.format(money), use_container_width=True)
 
-if details:
-    st.session_state.show_inline_details = not st.session_state.show_inline_details
+# if details:
+#     st.session_state.show_inline_details = not st.session_state.show_inline_details
 
-if st.session_state.show_inline_details:
+# if st.session_state.show_inline_details:
 
-    st.markdown("---")
-    st.markdown("### 📊 FTZ Cost Comparison")
+#     st.markdown("---")
+#     st.markdown("### 📊 FTZ Cost Comparison")
 
-    df = pd.DataFrame({
-        "Category": [
-            "Total Duty",
-            "Duty Saved of Exported Goods",
-            "Duty Saved on Non-Spec Goods",
-            "Total Net Duty",
-            "Total MPF",
-            "Total Broker Costs + HMF",
-            "Totals",
-            "FTZ Consulting",
-            "FTZ Management",
-            "FTZ Software Fee",
-            "FTZ Operator Bond",
-            "Total Operating Costs",
-            "Net Savings to Brand",
-        ],
-        "Without FTZ ($)": [
-            total_duty,
-            0,
-            0,
-            total_net_duty_no_ftz,
-            mpf_no_ftz,
-            broker_hmf_no_ftz,
-            total_net_duty_no_ftz + mpf_no_ftz + broker_hmf_no_ftz,
-            noftz_consult,
-            noftz_mgmt,
-            noftz_software,
-            noftz_bond,
-            cost_without_ftz,
-            total_cost_without_ftz,
-        ],
-        "With FTZ ($)": [
-            total_duty,
-            -duty_saved_export,
-            -duty_saved_offspec,
-            total_net_duty_with_ftz,
-            mpf_with_ftz,
-            broker_hmf_with_ftz,
-            total_net_duty_with_ftz + mpf_with_ftz + broker_hmf_with_ftz,
-            ftz_consult,
-            ftz_mgmt,
-            ftz_software,
-            ftz_bond,
-            cost_with_ftz - total_wc_saving,
-            total_cost_with_ftz,
-        ],
-        "FTZ Savings ($)": [
-            0,
-            duty_saved_export,
-            duty_saved_offspec,
-            total_net_duty_no_ftz - total_net_duty_with_ftz,
-            mpf_no_ftz - mpf_with_ftz,
-            broker_hmf_no_ftz - broker_hmf_with_ftz,
-            (
-                (total_net_duty_no_ftz + mpf_no_ftz + broker_hmf_no_ftz)
-                - (total_net_duty_with_ftz + mpf_with_ftz + broker_hmf_with_ftz)
-            ),
-            noftz_consult - ftz_consult,
-            noftz_mgmt - ftz_mgmt,
-            noftz_software - ftz_software,
-            noftz_bond - ftz_bond,
-            cost_without_ftz - (cost_with_ftz - total_wc_saving),
-            net_savings_to_brand,
-        ]
-    })
+#     df = pd.DataFrame({
+#         "Category": [
+#             "Total Duty",
+#             "Duty Saved of Exported Goods",
+#             "Duty Saved on Non-Spec Goods",
+#             "Total Net Duty",
+#             "Total MPF",
+#             "Total Broker Costs + HMF",
+#             "Totals",
+#             "FTZ Consulting",
+#             "FTZ Management",
+#             "FTZ Software Fee",
+#             "FTZ Operator Bond",
+#             "Total Operating Costs",
+#             "Net Savings to Brand",
+#         ],
+#         "Without FTZ ($)": [
+#             total_duty,
+#             0,
+#             0,
+#             total_net_duty_no_ftz,
+#             mpf_no_ftz,
+#             broker_hmf_no_ftz,
+#             total_net_duty_no_ftz + mpf_no_ftz + broker_hmf_no_ftz,
+#             noftz_consult,
+#             noftz_mgmt,
+#             noftz_software,
+#             noftz_bond,
+#             cost_without_ftz,
+#             total_cost_without_ftz,
+#         ],
+#         "With FTZ ($)": [
+#             total_duty,
+#             -duty_saved_export,
+#             -duty_saved_offspec,
+#             total_net_duty_with_ftz,
+#             mpf_with_ftz,
+#             broker_hmf_with_ftz,
+#             total_net_duty_with_ftz + mpf_with_ftz + broker_hmf_with_ftz,
+#             ftz_consult,
+#             ftz_mgmt,
+#             ftz_software,
+#             ftz_bond,
+#             cost_with_ftz - total_wc_saving,
+#             total_cost_with_ftz,
+#         ],
+#         "FTZ Savings ($)": [
+#             0,
+#             duty_saved_export,
+#             duty_saved_offspec,
+#             total_net_duty_no_ftz - total_net_duty_with_ftz,
+#             mpf_no_ftz - mpf_with_ftz,
+#             broker_hmf_no_ftz - broker_hmf_with_ftz,
+#             (
+#                 (total_net_duty_no_ftz + mpf_no_ftz + broker_hmf_no_ftz)
+#                 - (total_net_duty_with_ftz + mpf_with_ftz + broker_hmf_with_ftz)
+#             ),
+#             noftz_consult - ftz_consult,
+#             noftz_mgmt - ftz_mgmt,
+#             noftz_software - ftz_software,
+#             noftz_bond - ftz_bond,
+#             cost_without_ftz - (cost_with_ftz - total_wc_saving),
+#             net_savings_to_brand,
+#         ]
+#     })
 
-    st.dataframe(
-        df.style
-        .format(money)
-        .hide(axis="index"),
-        use_container_width=True,
-        height=480
-    )
+#     st.dataframe(
+#         df.style
+#         .format(money)
+#         .hide(axis="index"),
+#         use_container_width=True,
+#         height=480
+#     )
 
 
 # =====================================================
